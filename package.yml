@@ -1,0 +1,15 @@
+package: community.lazycat.app.next-ai-draw-io
+version: 0.5.0
+name: Next AI Draw.io
+description: "AI + draw.io diagram web app (natural language to diagrams)"
+min_os_version: 1.5.0
+author: DayuanJiang
+license: Apache-2.0
+homepage: https://github.com/DayuanJiang/next-ai-draw-io
+locales:
+  zh:
+    name: "Next AI Draw.io"
+    description: "用自然语言创建、修改、美化 draw.io 图表：AI 生成、多版本对比恢复、导出 .drawio/.png/.svg"
+  en:
+    name: "Next AI Draw.io"
+    description: "Create, modify and enhance draw.io diagrams through natural language commands with AI"

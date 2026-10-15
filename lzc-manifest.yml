@@ -1,0 +1,43 @@
+application:
+  subdomain: next-ai-draw-io
+  background_task: true
+  multi_instance: false
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://next-ai-draw-io:3000/
+
+services:
+  next-ai-draw-io:
+    # upstream: ghcr.io/dayuanjiang/next-ai-draw-io:0.5.0
+    image: ghcr.1ms.run/dayuanjiang/next-ai-draw-io:0.5.0
+    environment:
+      - NEXT_PUBLIC_SELFHOSTED=true
+      - SETTINGS_FILE=/app/data/settings.json
+      # 管理面板（部署参数留空则不启用）
+      - ADMIN_PASSWORD={{ .U.admin_password }}
+      # 服务端模型配置文件（setup_script 依据部署参数生成；空配置时应用回退到页面内自带 Key）
+      - AI_MODELS_CONFIG_PATH=/app/data/ai-models.json
+      - LZC_AI_API_KEY={{ .U.ai_api_key }}
+      - LZC_AI_BASE_URL={{ .U.ai_base_url }}
+    binds:
+      - /lzcapp/var/next-ai-draw-io:/app/data
+    setup_script: |
+      # 依据部署参数生成服务端多模型配置（ai-models.json）。
+      # provider 留空时移除配置文件，走用户自带 Key 模式。
+      if [ -n "{{ .U.ai_provider }}" ] && [ -n "{{ .U.ai_model }}" ]; then
+        cat > /app/data/ai-models.json <<JSON
+      {"providers":[{"name":"Server Model","provider":"{{ .U.ai_provider }}","models":["{{ .U.ai_model }}"],"default":true,"apiKeyEnv":"LZC_AI_API_KEY","baseUrlEnv":"LZC_AI_BASE_URL"}]}
+      JSON
+      else
+        rm -f /app/data/ai-models.json
+      fi
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q --spider http://127.0.0.1:3000/ || exit 1
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s

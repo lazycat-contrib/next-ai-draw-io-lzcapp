@@ -1,0 +1,53 @@
+params:
+  - id: ai_provider
+    type: string
+    name: "AI Provider"
+    description: "Provider id, e.g. openai, anthropic, deepseek, glm, qwen, ollama, custom (OpenAI-compatible). Leave empty to skip server-side model config (users enter keys in the web UI)"
+    default_value: ""
+    optional: true
+
+  - id: ai_model
+    type: string
+    name: "AI Model"
+    description: "Model ID, e.g. gpt-4o, deepseek-chat, glm-4. Required when AI Provider is set"
+    default_value: ""
+    optional: true
+
+  - id: ai_api_key
+    type: secret
+    name: "AI API Key"
+    description: "API key for the provider (server-side config; leave empty if users bring their own keys in the web UI)"
+    default_value: ""
+    optional: true
+
+  - id: ai_base_url
+    type: string
+    name: "AI Base URL"
+    description: "Optional custom endpoint, e.g. https://your-gateway.example.com/v1"
+    default_value: ""
+    optional: true
+
+  - id: admin_password
+    type: secret
+    name: "Admin Panel Password"
+    description: "Password for /admin management panel (empty disables the admin panel)"
+    default_value: ""
+    optional: true
+
+locales:
+  zh:
+    ai_provider:
+      name: "AI 服务商"
+      description: "服务商 ID，如 openai、anthropic、deepseek、glm、qwen、ollama、custom（OpenAI 兼容）。留空则跳过服务端模型配置（用户在页面里自己填 Key）"
+    ai_model:
+      name: "AI 模型"
+      description: "模型 ID，如 gpt-4o、deepseek-chat、glm-4。填写服务商后必填"
+    ai_api_key:
+      name: "AI API Key"
+      description: "服务商 API Key（服务端配置；留空则用户在页面里自带 Key）"
+    ai_base_url:
+      name: "AI Base URL"
+      description: "可选自定义端点，如 https://your-gateway.example.com/v1"
+    admin_password:
+      name: "管理面板密码"
+      description: "/admin 管理面板密码（留空禁用管理面板）"
