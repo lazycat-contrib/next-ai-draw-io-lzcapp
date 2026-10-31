@@ -1,5 +1,5 @@
 package: community.lazycat.app.next-ai-draw-io
-version: 0.5.0
+version: 0.5.1
 name: Next AI Draw.io
 description: "AI + draw.io diagram web app (natural language to diagrams)"
 min_os_version: 1.5.0

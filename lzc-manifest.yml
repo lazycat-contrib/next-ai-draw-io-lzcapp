@@ -7,11 +7,10 @@ application:
   upstreams:
     - location: /
       backend: http://next-ai-draw-io:3000/
-
 services:
   next-ai-draw-io:
-    # upstream: ghcr.io/dayuanjiang/next-ai-draw-io:0.5.0
-    image: ghcr.1ms.run/dayuanjiang/next-ai-draw-io:0.5.0
+    # upstream: ghcr.io/dayuanjiang/next-ai-draw-io:0.5.1
+    image: ghcr.1ms.run/dayuanjiang/next-ai-draw-io:0.5.1
     environment:
       - NEXT_PUBLIC_SELFHOSTED=true
       - SETTINGS_FILE=/app/data/settings.json
